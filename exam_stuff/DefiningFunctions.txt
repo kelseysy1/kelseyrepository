@@ -1,0 +1,26 @@
+1.) the is_divisible function in the next example accepts two parameters, but this time returns a boolean (True or False) result. In particular, it returns True if the second parameter evenly divides the first, and False if it doesn't. 
+
+# Determines if the first parameter is evenly divisible by the second.
+def is_divisible(num1, num2):
+    if num2 == 0:
+        return False
+    else:
+        return num1 % num2 == 0
+
+# main program
+if is_divisible(20, 5):
+    print('20 is evenly divisible by 5')
+else:
+    print('20 is NOT evenly divisible by 5')
+
+if is_divisible(17, 3):
+    print('17 is evenly divisible by 3')
+else:
+    print('17 is NOT evenly divisible by 3')
+
+
+
+2.) returns the below:
+
+20 is evenly divisible by 5
+17 is NOT evenly divisible by 3

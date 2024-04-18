@@ -1,0 +1,483 @@
+1.) Write code that constructs a string made up of each character in a string variable named word repeated twice. for example, if "word" contains 'python' the resulting string would be ppyytthhoonn. store the constructed string in a variable called double_word. assume that word has already been initialized
+
+
+double_word = ''
+
+for i in range(len(word)):
+    double_word += word[i] * 2
+
+#remember, you cannot concatenate a string and an integer in the same line in python without int() or str()
+---------------------------------------------------------------------------------------------------------------------------
+2.)
+
+sales = [32, 32]
+total = 0
+for amount in sales:
+    total += amount
+
+print('Total:', total)
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+3.)
+
+sum = 0
+
+for val in range(4,9):
+    sum += val
+    print(val, end = ' ')
+
+print()
+#4 5 6 7 8
+print('Sum: ', sum)
+#Sum: 30
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+4.) code that stores fourth char of a string called text into a variable called fourth_char
+
+fourth_char = text[3]
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+5.)
+
+def monkey_trouble(a_smile, b_smile):
+  if a_smile and b_smile:
+    return True
+  if not a_smile and not b_smile:
+    return True
+  return False
+  ## The above can be shortened to:
+  ##   return ((a_smile and b_smile) or (not a_smile and not b_smile))
+  ## Or this very short version (think about how this is the same as the above)
+  ##   return (a_smile == b_smile)
+  
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+6.)
+
+wind_str = 'You are the wind beneath my wings!'
+
+print('Full string:', wind_str)
+print('wind_str[-14:]:', wind_str[-14:])
+print('wind_str[:-14]:', wind_str[:-14])
+
+
+
+#Full string: You are the wind beneath my wings!
+#wind_str[-14:]: eath my wings!
+#wind_str[:-14]: You are the wind ben
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+7.)  Given non-empty string and an int n, return a new string where the char at index n has been removed. The value of n will be a valid index of a char in the original string (i.e. n will be in the range 0..len(str)-1 inclusive).
+
+def missing_char(str, n):
+  front = str[:n]   # up to but not including n
+  back = str[n+1:]  # n+1 through end of string
+  return front + back
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+8.) Given a string, return a new string where first and last chars have been exchanged.
+
+def front_back(str):
+  if len(str) <= 1:
+    return str
+  
+  mid = str[1:len(str)-1]  # can be written as str[1:-1]
+  
+  # last + mid + first
+  return str[len(str)-1] + mid + str[0]
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+9.) Given a string, return a new string where "not " has been added to the front. However, if the string already begins with "not", return the string unchanged.
+
+def not_string(str):
+  if len(str) >= 3 and str[:3] == "not":
+    return str
+  return "not " + str
+  # str[:3] goes from the start of the string up to but not
+  # including index 3
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+
+10.) Given 2 ints, a and b, return True if one if them is 10 or if their sum is 10.
+
+def makes10(a, b):
+  return (a == 10 or b == 10 or a+b == 10)
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+
+11.) Given two int values, return their sum. Unless the two values are the same, then return double their sum.
+
+def sum_double(a, b):
+  # Store the sum in a local variable
+  sum = a + b
+  
+  # Double it if a and b are the same
+  if a == b:
+    sum = sum * 2
+  return sum
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+
+12.) Given a string, we'll say that the front is the first 3 chars of the string. If the string length is less than 3, the front is whatever is there. Return a new string which is 3 copies of the front.
+  def front3(str):
+  first_three = str[:3]
+  
+  if len(str) < 3:
+    return str*3
+  else:
+    return first_three*3
+
+
+13.) 
+Given 2 strings, a and b, return the number of the positions where they contain the same length 2 substring. So "xxcaazz" and "xxbaaz" yields 3, since the "xx", "aa", and "az" substrings appear in the same place in both strings.
+
+def string_match(a, b):
+    # Initialize a counter to store the number of matching substrings
+    count = 0
+
+    # Determine the shorter length of the two strings
+    min_length = min(len(a), len(b))
+
+    # Iterate through the strings up to the second-to-last index
+    for i in range(min_length - 1):
+        # Check if the current 2-character substring in both strings matches
+        if a[i:i+2] == b[i:i+2]:
+            # If they match, increment the counter
+            count += 1
+
+    return count
+
+
+class Card:
+    '''
+    Represents a playing card that has a rank and suit.
+    '''
+    
+    def __init__(self, rank, suit):
+        self.rank = rank
+        self.suit = suit
+        
+    def __str__(self):
+        return self.rank + ' of ' + self.suit
+
+
+-------------------------------------------
+
+import random
+from card import Card
+
+class DeckOfCards:
+    '''
+    Represents a standard deck of playing cards.
+    '''
+    
+    def __init__(self):
+        suits = ['Clubs', 'Diamonds', 'Hearts', 'Spades']
+        ranks = ['2', '3', '4', '5', '6', '7', '8', '9',
+                 '10', 'Jack', 'Queen', 'King', 'Ace']
+        
+        self.deck = []
+        
+        for suit in suits:
+            for rank in ranks:
+                self.deck.append(Card(rank, suit))
+    
+    def shuffle(self):
+        random.shuffle(self.deck)
+    
+    def deal_card(self):
+        card = None
+        if len(self.deck) > 0:
+            card = self.deck.pop(0)
+        return card
+
+    def size(self):
+        return len(self.deck)
+    
+    def __str__(self):
+        deck_str = ''
+        for card in self.deck:
+            deck_str += str(card) + '\n'
+        return deck_str
+    
+
+----------------------------------------------
+
+from deck_of_cards import DeckOfCards
+
+deck = DeckOfCards()   #creates a DeckOfCards object
+
+print('The unshuffled deck:')
+print(deck)
+
+deck.shuffle()
+
+print('Deal the top five cards from a shuffled deck:')
+
+for count in range(5):
+    print(deck.deal_card())
+    
+print()
+print('Number of cards left in the deck:', deck.size())
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+14.)  Given an array of ints, return True if the array is length 1 or more, and the first element and the last element are equal.
+
+
+def same_first_last(nums):
+    # Check if the array is non-empty and the first and last elements are equal
+    return len(nums) >= 1 and nums[0] == nums[-1]
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+15.) Given an array of ints, return True if 6 appears as either the first or last element in the array. The array will be length 1 or more.
+
+def first_last6(nums):
+
+    return nums[0] == 6 or nums[-1] == 6
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+16.) Return the number of even ints in the given array. Note: the % "mod" operator computes the remainder, e.g. 5 % 2 is 1.
+def count_evens(nums):
+    # Initialize a counter for even integers
+    count = 0
+    
+    # Iterate through the array
+    for num in nums:
+        # Check if the number is even (remainder when divided by 2 is 0)
+        if num % 2 == 0:
+            count += 1
+    
+    return count
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+17.) Return the sum of the numbers in the array, returning 0 for an empty array. Except the number 13 is very unlucky, so it does not count and numbers that come immediately after a 13 also do not count.
+
+
+def sum_without_unlucky(nums):
+    # Initialize sum
+    total = 0
+    # Initialize a flag to check if the previous number was 13
+    unlucky_flag = False
+
+    # Iterate through the array
+    for num in nums:
+        # Check if the current number is 13
+        if num == 13:
+            # Set the unlucky flag to True
+            unlucky_flag = True
+        # Check if the previous number was not 13
+        elif not unlucky_flag:
+            # Add the number to the sum
+            total += num
+        # Check if the current number is not 13 but the previous number was
+        elif unlucky_flag:
+            # Reset the unlucky flag
+            unlucky_flag = False
+
+    return total
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+18.) 
+Given an array length 1 or more of ints, return the difference between the largest and smallest values in the array. Note: the built-in min(v1, v2) and max(v1, v2) functions return the smaller or larger of two values.
+
+
+def big_diff(nums):
+    # Find the smallest and largest values in the array
+    smallest = min(nums)
+    largest = max(nums)
+    # Calculate the difference between the largest and smallest values
+    diff = largest - smallest
+    return diff
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+19.) Given an array of ints, return True if the array contains a 2 next to a 2 somewhere.
+
+def has22(nums):
+    # Iterate through the array except the last element
+    for i in range(len(nums) - 1):
+        # Check if the current element and the next element are both 2
+        if nums[i] == 2 and nums[i+1] == 2:
+            return True
+    # If no such pair is found, return False
+    return False
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+20.) 
+Return True if the given string contains an appearance of "xyz" where the xyz is not directly preceeded by a period (.). So "xxyz" counts but "x.xyz" does not.
+
+def xyz_there(s):
+    # Iterate through the string
+    for i in range(len(s) - 2):
+        # Check if "xyz" occurs and it's not preceded by a period
+        if s[i:i+3] == "xyz" and (i == 0 or s[i-1] != "."):
+            return True
+    # If no such occurrence is found, return False
+    return False
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+21.) Given a string, return a string where for every char in the original, there are two chars.
+
+def double_char(s):
+    # Initialize an empty string to store the result
+    result = ""
+    # Iterate through each character in the original string
+    for char in s:
+        # Add the current character twice to the result string
+        result += char * 2
+    return result
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+22.) 
+Given two strings, return True if either of the strings appears at the very end of the other string, ignoring upper/lower case differences (in other words, the computation should not be "case sensitive"). Note: s.lower() returns the lowercase version of a string.
+def end_other(a, b):
+    # Convert both strings to lowercase
+    a_lower = a.lower()
+    b_lower = b.lower()
+    
+    # Check if either string appears at the very end of the other string
+    return a_lower.endswith(b_lower) or b_lower.endswith(a_lower)
+
+
+23.) Given a non-empty string like "Code" return a string like "CCoCodCode".
+def string_splosion(s):
+    result = ''
+    for i in range(len(s)):
+        result += s[:i+1]
+    return result
+
+
+
+23.) Given an array of ints, return True if one of the first 4 elements in the array is a 9. The array length may be less than 4.
+
+def array_front9(nums):
+    # Check if the array length is less than 4
+    end = min(4, len(nums))
+    # Iterate through the elements up to the first 4 elements or the array length
+    for i in range(end):
+        # Check if the current element is 9
+        if nums[i] == 9:
+            return True
+    # If no 9 is found within the first 4 elements, return False
+    return False
+
+
+
+24.) Given a string, return a new string made of every other char starting with the first, so "Hello" yields "Hlo".
+
+def string_bits(s):
+    # Use string slicing to extract every other character starting from index 0
+    return s[::2]
+
+25.)
+Given an array of ints, return the number of 9's in the array.
+
+def array_count9(nums):
+    # Initialize a counter for the number of occurrences of 9
+    count = 0
+    # Iterate through the elements of the array
+    for num in nums:
+        # Check if the current element is 9
+        if num == 9:
+            count += 1
+    return count
+
+
+
+26.) Given a string, return the count of the number of times that a substring length 2 appears in the string and also as the last 2 chars of the string, so "hixxxhi" yields 1 (we won't count the end substring).
+
+def last2(s):
+    # Check if the string length is less than 2, in which case the result is 0
+    if len(s) < 2:
+        return 0
+    
+    # Get the last two characters of the string
+    end = s[-2:]
+    # Initialize a counter for the number of occurrences
+    count = 0
+    
+    # Iterate through the string, excluding the last two characters
+    for i in range(len(s) - 2):
+        # Check if the current substring of length 2 matches the last two characters
+        if s[i:i+2] == end:
+            count += 1
+    return count
+
+
+27.) Given a string and a non-negative int n, we'll say that the front of the string is the first 3 chars, or whatever is there if the string is less than length 3. Return n copies of the front;
+def front_times(str, n):
+  return str[:3] * n
+
+
+
+28.) Type conversion functions such as int or float will produce a ValueError if the string doesn't contain a valid value.
+
+age = int(input('What is your age? '))  #must be an int entered
+print(age)
+
+29.) COMPREHENSION: ['P', 'Y', 'T', 'H', 'O', 'N']
+
+
+letters = [ch.upper() for ch in 'Python']
+print(letters)
+
+
+30.) COMPREHENSION: ['G', 'd', ' ', 'v', 'n', ' ', 'R', 's', 's', 'm']
+name = 'Guido van Rossum'
+consonants = [ch for ch in name if ch.lower() not in {'a', 'e', 'i', 'o', 'u'}]
+print(consonants)
+
+
+COMPREHENSION: [34, 18, 36, 64, 50]
+values = [34, 27, 95, 18, 36, 21, 64, 50, 77]
+even_values = [x for x in values if x % 2 == 0]
+print(even_values)
+
+
+
+31.) Dictionary comprehension:
+{1: 'Sunday', 2: 'Monday', 3: 'Tuesday', 4: 'Wednesday', 5: 'Thursday', 6: 'Friday', 7: 'Saturday'}
+
+Day 1 is Sunday
+Day 2 is Monday
+Day 3 is Tuesday
+Day 4 is Wednesday
+Day 5 is Thursday
+Day 6 is Friday
+Day 7 is Saturday
+#the answer above, code is below
+---------------
+
+day_names = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+
+days = {n + 1 : day_names[n] for n in range(len(day_names))}
+print(days)
+print()
+
+for day_num, day_name in days.items():
+    print('Day', day_num, 'is', day_name)
+
+
+
+
+
+
+
+
+
+
+
+
+

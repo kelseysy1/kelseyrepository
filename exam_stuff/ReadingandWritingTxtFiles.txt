@@ -1,0 +1,57 @@
+1.) To perform input and output (I/O) on a text file in Python, you must first open the file. The built-in open function returns a file object:
+
+file = open('somefile.txt', 'r')
+
+
+2.) The following example example reads the file and computes the average score:
+
+sum = 0
+count = 0
+
+with open('scores.txt', 'r') as scores_file:
+    for line in scores_file:
+        sum += int(line)
+        count = count + 1
+
+average_score = sum / count
+
+print('The average score is', round(average_score, 1))
+
+3.) The solution to the above.... "The average score is 81.5"
+
+---------------------------------------------------------------------------------------
+
+1.) given this file:
+
+Thomas Jones 70
+Marcus Hansen 68
+Sarah Jenkins 63
+
+2.) read input file and print height of each in feet and inches
+
+
+with open('heights.txt', 'r') as heights_file:
+    for line in heights_file:
+        values = line.split()
+        height_in_inches = int(values[2])
+        feet, inches = divmod(height_in_inches, 12)
+        print(values[0], values[1], 'is', feet, 'feet,', inches, 'inches tall.')
+
+
+3.) The for loop reads each line of the file one at a time. For each line, the split method 
+is used to separate the input line into a list of three separate values. 
+The first and last names of the person end up in the first two elements 
+of the list (values[0] and values[1]), and the height is in values[2].
+
+Keep in mind that all of the input values are still strings. 
+To process the height value as a number, it is converted from a string to an integer using the built-in int function. 
+
+
+
+
+
+
+
+
+
+
